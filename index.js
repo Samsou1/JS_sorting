@@ -20,15 +20,15 @@ try {
     console.error(error.message);
 }
 
-// console.log(bubble_sort([...list]));
-// console.log(insertion_sort([...list]));
+console.log(bubble_sort([...list]));
+console.log(insertion_sort([...list]));
 console.log(selection_sort([...list]));
-// console.log(quick_sort([...list]));
+console.log(quick_sort([...list]));
 
 function bubble_sort(ary){
     var comparison = 0;
     for(var i = 0; i < ary.length; i++){
-        for(var j = 0 ; j < ary.length - i ; j++){
+        for(var j = 0 ; j < ary.length - i - 1 ; j++){
             if(ary[j]>ary[j+1]){
                 [ary[j], ary[j+1]] = [ary[j+1], ary[j]];
             }
@@ -40,13 +40,13 @@ function bubble_sort(ary){
 
 function insertion_sort(ary){
     var comparison = 0;
-    for(var i = 0; i < ary.length; i++){
+    for(var i = 1; i < ary.length; i++){
         for(var j = i ; j > 0 ; j--){
             if(ary[j] < ary[j -1]){
                 // Here we copy ary[j] and insert it at index j - 1
-                ary.splice(j - 1, 0, ary[j])
+                ary.splice(j - 1, 0, ary[j]);
                 // Now we delete the element we just copied which is now in position j + 1 instead of j
-                ary.splice(j + 1, 1)
+                ary.splice(j + 1, 1);
             }
             comparison += 1;
         }
@@ -65,6 +65,8 @@ function selection_sort(ary){
             comparison += 1;
         }
         ary.splice(i, 0, min);
+        // Here we look for the value min to destroy it but we have to be careful not to delete the first value we just copied.
+        // Hence the i + 1 stating that we are only looking for the value after index i + 1
         ary.splice(ary.indexOf(min, i + 1), 1)
     }
     return `Selection sort: ${comparison} comparisons ` + ary;
