@@ -56,6 +56,17 @@ function insertion_sort(ary){
 
 function selection_sort(ary){
     var comparison = 0;
+    for(var i = 0; i < ary.length; i++){
+        var min = ary[i];
+        for(var j = i + 1; j < ary.length; j++){
+            if(ary[j] < min){
+                min = ary[j];
+            }
+            comparison += 1;
+        }
+        ary.splice(i, 0, min);
+        ary.splice(ary.indexOf(min, i + 1), 1)
+    }
     return `Selection sort: ${comparison} comparisons ` + ary;
 }
 
