@@ -23,6 +23,7 @@ try {
 console.log(bubble_sort([...list]));
 console.log(insertion_sort([...list]));
 console.log(selection_sort([...list]));
+let comparison_quick_sort = 0;
 console.log(quick_sort([...list]));
 
 function bubble_sort(ary){
@@ -74,11 +75,11 @@ function selection_sort(ary){
 
 function quick_sort(ary){
     var result = qs(ary);
-    return `Quick sort: x comparisons ` + result;
+    return `Quick sort: ${comparison_quick_sort} comparisons ` + result;
 }
 
 function qs(ary){
-    if(ary.length <=1){
+    if(ary.length <= 1){
         return ary;
     }else{
         pivot = ary.pop();
@@ -91,6 +92,7 @@ function qs(ary){
         }else{
             greater_than_pivot.push(element);
         }
+        comparison_quick_sort += 1;
     })
     return qs(smaller_than_pivot).concat([pivot],qs(greater_than_pivot));
 }
