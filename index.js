@@ -33,7 +33,7 @@ function bubble_sort(ary){
             if(ary[j]>ary[j+1]){
                 [ary[j], ary[j+1]] = [ary[j+1], ary[j]];
             }
-            comparison +=1;
+            comparison++;
         }
     }
     return `Bubble sort: ${comparison} comparisons ` + ary;
@@ -42,15 +42,14 @@ function bubble_sort(ary){
 function insertion_sort(ary){
     var comparison = 0;
     for(var i = 1; i < ary.length; i++){
-        for(var j = i ; j > 0 ; j--){
-            if(ary[j] < ary[j -1]){
-                // Here we copy ary[j] and insert it at index j - 1
-                ary.splice(j - 1, 0, ary[j]);
-                // Now we delete the element we just copied which is now in position j + 1 instead of j
-                ary.splice(j + 1, 1);
-            }
-            comparison += 1;
+        let current_value = ary[i];
+        let j = i - 1;
+        while ((j >= 0) && (current_value < ary[j])) {
+            ary[j+1] = ary[j];
+            j--;
+            comparison++;
         }
+        ary[j+1] = current_value;
     }
     return `Insertion sort: ${comparison} comparisons ` + ary;
 }
@@ -63,7 +62,7 @@ function selection_sort(ary){
             if(ary[j] < min){
                 min = ary[j];
             }
-            comparison += 1;
+            comparison++;
         }
         ary.splice(i, 0, min);
         // Here we look for the value min to destroy it but we have to be careful not to delete the first value we just copied.
@@ -81,18 +80,17 @@ function quick_sort(ary){
 function qs(ary){
     if(ary.length <= 1){
         return ary;
-    }else{
-        pivot = ary.pop();
     }
-    let greater_than_pivot = [];
-    let smaller_than_pivot = [];
+    var pivot = ary.pop();
+    var greater_than_pivot = [];
+    var smaller_than_pivot = [];
     ary.map(function(element){
         if(element < pivot){
             smaller_than_pivot.push(element);
         }else{
             greater_than_pivot.push(element);
         }
-        comparison_quick_sort += 1;
+        comparison_quick_sort++;
     })
-    return qs(smaller_than_pivot).concat([pivot],qs(greater_than_pivot));
+    return (qs(smaller_than_pivot).concat([pivot], qs(greater_than_pivot)));
 }
