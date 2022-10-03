@@ -73,6 +73,24 @@ function selection_sort(ary){
 }
 
 function quick_sort(ary){
-    var comparison = 0;
-    return `Quick sort: ${comparison} comparisons ` + ary;
+    var result = qs(ary);
+    return `Quick sort: x comparisons ` + result;
+}
+
+function qs(ary){
+    if(ary.length <=1){
+        return ary;
+    }else{
+        pivot = ary.pop();
+    }
+    let greater_than_pivot = [];
+    let smaller_than_pivot = [];
+    ary.map(function(element){
+        if(element < pivot){
+            smaller_than_pivot.push(element);
+        }else{
+            greater_than_pivot.push(element);
+        }
+    })
+    return qs(smaller_than_pivot).concat([pivot],qs(greater_than_pivot));
 }
